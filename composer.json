@@ -1,0 +1,44 @@
+{
+    "name": "ezavalishin/skabl-connect",
+    "description": ":package_description",
+    "license": "license",
+    "authors": [
+        {
+            "name": "author name",
+            "email": "author email",
+            "homepage": "author homepage"
+        }
+    ],
+    "homepage": "https://github.com/ezavalishin/skablconnect",
+    "keywords": [
+        "Laravel",
+        "SkablConnect"
+    ],
+    "require": {
+        "illuminate/support": "~7|~8",
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ezavalishin\\SkablConnect\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ezavalishin\\SkablConnect\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ezavalishin\\SkablConnect\\SkablConnectServiceProvider"
+            ],
+            "aliases": {
+                "SkablConnect": "ezavalishin\\SkablConnect\\Facades\\SkablConnect"
+            }
+        }
+    }
+}
