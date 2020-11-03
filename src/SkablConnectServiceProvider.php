@@ -32,9 +32,9 @@ class SkablConnectServiceProvider extends ServiceProvider
         // Register the service the package provides.
         $this->app->singleton('skabl-connect', function (Application $app) {
             return new SkablConnect(
-                config('skabl-connect.url'),
-                config('skabl-connect.client_id'),
-                config('skabl-connect.client_secret'),
+                config('skabl-connect.url', 'http://localhost'),
+                config('skabl-connect.client_id', 1),
+                config('skabl-connect.client_secret', 'secret'),
             );
         });
     }
