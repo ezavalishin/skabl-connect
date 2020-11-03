@@ -23,12 +23,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Ezavalishin\\SkablConnect\\": "src/"
+            "ezavalishin\\SkablConnect\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Ezavalishin\\SkablConnect\\Tests\\": "tests"
+            "ezavalishin\\SkablConnect\\Tests\\": "tests"
         }
     },
     "extra": {
