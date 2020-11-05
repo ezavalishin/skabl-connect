@@ -148,4 +148,44 @@ class SkablConnect
 
         return new UserResponse(json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR)['data']);
     }
+
+    /**
+     * @param array $attributes
+     * @return UserResponse
+     * @throws AccessTokenRequired
+     * @throws GuzzleException
+     * @throws InvalidAccessToken
+     * @throws \JsonException
+     * @throws ValidationException
+     */
+    public function updateUser(array $attributes): bool
+    {
+        if (!isset($this->accessToken)) {
+            throw new AccessTokenRequired('access token required');
+        }
+
+        try {
+            $this->client->put('/api/user', [
+                'json' => $attributes,
+                'headers' => [
+                    'Accept' => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->accessToken
+                ]
+            ]);
+        } catch (GuzzleException $e) {
+            if ($e instanceof RequestException && ($response = $e->getResponse()) && $response->getStatusCode() === 401) {
+                throw new InvalidAccessToken('invalid access token');
+            }
+
+            if ($e instanceof RequestException && ($response = $e->getResponse()) && $response->getStatusCode() === 422) {
+                $response = json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
+
+                throw ValidationException::withMessages($response['errors']);
+            }
+
+            throw $e;
+        }
+
+        return true;
+    }
 }
