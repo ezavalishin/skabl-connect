@@ -15,7 +15,7 @@
         "SkablConnect"
     ],
     "require": {
-        "illuminate/support": "~7|~8",
+        "illuminate/support": "~5|~6|~7|~8",
         "guzzlehttp/guzzle": "~6|~7"
     },
     "require-dev": {
