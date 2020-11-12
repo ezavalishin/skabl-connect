@@ -151,12 +151,12 @@ class SkablConnect
 
     /**
      * @param array $attributes
-     * @return UserResponse
+     * @return bool
      * @throws AccessTokenRequired
      * @throws GuzzleException
      * @throws InvalidAccessToken
-     * @throws \JsonException
      * @throws ValidationException
+     * @throws \JsonException
      */
     public function updateUser(array $attributes): bool
     {
@@ -187,5 +187,29 @@ class SkablConnect
         }
 
         return true;
+    }
+
+    /**
+     * @param string $email
+     * @param string $password
+     * @return UserResponse
+     * @throws GuzzleException
+     * @throws \JsonException
+     */
+    public function linkUser(string $email, string $password): UserResponse
+    {
+        $response = $this->client->post('/api/link', [
+            'headers' => [
+                'Accept' => 'application/json',
+            ],
+            'json' => [
+                'client_id' => $this->clientId,
+                'client_secret' => $this->clientSecret,
+                'email' => $email,
+                'password' => $password
+            ]
+        ]);
+
+        return new UserResponse(json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR)['data']);
     }
 }
